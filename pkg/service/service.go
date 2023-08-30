@@ -7,6 +7,7 @@ import (
 
 type Slugger interface {
 	CreateSlug(models.Slug) (int64, error)
+	DeleteSlug(slug models.Slug) (int64, error)
 }
 
 type User interface {

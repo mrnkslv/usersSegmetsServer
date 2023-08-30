@@ -16,3 +16,6 @@ func NewSlugService(repo repository.Slugger) *Slug {
 func (s *Slug) CreateSlug(slug models.Slug) (int64, error) {
 	return s.repo.CreateSlug(slug)
 }
+func (s *Slug) DeleteSlug(slug models.Slug) (int64, error) {
+	return s.repo.DeleteSlug(slug)
+}

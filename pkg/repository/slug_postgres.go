@@ -23,3 +23,13 @@ func (r *SlugPostgres) CreateSlug(slug models.Slug) (int64, error) {
 	}
 	return id, nil
 }
+
+func (r *SlugPostgres) DeleteSlug(slug models.Slug) (int64, error) {
+	var id int64
+	query := fmt.Sprintf("delete from %s where name=$1 returning id", slugsTable)
+	row := r.db.QueryRow(query, slug.Name)
+	if err := row.Scan(&id); err != nil {
+		return 0, err
+	}
+	return id, nil
+}

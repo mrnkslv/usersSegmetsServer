@@ -21,7 +21,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	slugs := api.Group("/slugs")
 	{
 		slugs.POST("/", h.createSlug)
-		slugs.DELETE("/:id", h.deleteSlug)
+		slugs.DELETE("/", h.deleteSlug)
 	}
 	users := api.Group("/users")
 	{
