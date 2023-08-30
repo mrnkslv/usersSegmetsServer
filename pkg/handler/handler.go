@@ -25,7 +25,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	}
 	users := api.Group("/users")
 	{
-		users.POST("/:id", h.addUserToSlug)        //slugid
+		users.POST("/", h.addUserToSlug)           //slugid
 		users.DELETE("/:id", h.deleteUserFromSlug) //slugid
 		users.GET("/:id", h.getActiveSlugsByID)    //userid
 	}

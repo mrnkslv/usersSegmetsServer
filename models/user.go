@@ -1,7 +1,7 @@
 package models
 
 type User struct {
-	Id   int64  `json:"id" db:"id"	`
+	Id   int64  `json:"id" db:"id"`
 	Name string `json:"name" binding:"required"`
 }
 
@@ -9,6 +9,12 @@ type UserSlugs struct {
 	Id     int64 `json:"-" db:"id"`
 	UserId int64 `json:"user_id"`
 	SlugId int64 `json:"slug_id"`
+}
+
+type AddSlugstoUser struct {
+	NewSlugs      []Slug `json:"new_slugs"`
+	OutdatedSlugs []Slug `json:"outdated_slugs"`
+	UserId        int64  `json:"user_id"`
 }
 
 /*create table users(

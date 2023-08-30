@@ -11,6 +11,7 @@ type Slugger interface {
 }
 
 type User interface {
+	AddUserToSlug(data models.AddSlugstoUser) (int64, error)
 }
 
 type Repository struct {
@@ -21,5 +22,6 @@ type Repository struct {
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Slugger: NewSlugPostgres(db),
+		User:    NewUserPostgres(db),
 	}
 }

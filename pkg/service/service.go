@@ -10,16 +10,18 @@ type Slugger interface {
 	DeleteSlug(slug models.Slug) (int64, error)
 }
 
-type User interface {
+type Users interface {
+	AddUserToSlug(data models.AddSlugstoUser) (int64, error)
 }
 
 type Service struct {
 	Slugger
-	User
+	Users
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Slugger: NewSlugService(repos.Slugger),
+		Users:   NewUserService(repos.User),
 	}
 }
