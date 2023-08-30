@@ -1,5 +1,6 @@
 package models
 
 type Slug struct {
-	Name string `json:"name"`
+	Id   int64  `db:"id" json:"id"`
+	Name string `db:"name" json:"name"`
 }
