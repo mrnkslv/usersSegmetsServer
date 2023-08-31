@@ -15,7 +15,7 @@ func (h *Handler) addUserToSegment(c *gin.Context) {
 		return
 	}
 	exists, err := h.services.Users.Exists(input.UserId)
-	if exists == false {
+	if !exists {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
