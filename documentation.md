@@ -125,15 +125,16 @@ Body
 }
 ```
 
-Success response (return empty lines if segment already added to user)
+Success response ()
 ```
 {
+    "deleted_segments": [],
   "new_segments": [
     {
       "name": "AVITO_DISCOUNT_30"
     },
     {
-      "name": ""
+        "name":"AVITO_DISCOUNT_50"
     }
   ]
 }

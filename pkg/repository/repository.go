@@ -11,7 +11,7 @@ type Segment interface {
 }
 
 type User interface {
-	AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, error)
+	AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, []models.Segment, error)
 	GetActiveSegmentsByID(userId int64) ([]models.Segment, error)
 	GetUserById(userId int64) (int64, error)
 }
