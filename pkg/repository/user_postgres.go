@@ -15,29 +15,29 @@ func NewUserPostgres(db *sqlx.DB) *UserPostgres {
 	return &UserPostgres{db: db}
 }
 
-func (r *UserPostgres) AddUserToSlug(data models.AddSlugstoUser) ([]models.Slug, error) {
+func (r *UserPostgres) AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, error) {
 	//добавить транзакцию
-	deleteQuery := fmt.Sprintf("delete from %s where user_id=$1 and slug_id=(select id from slugs where name=$2)", usersSlugsTable)
-	for i := 0; i < len(data.OutdatedSlugs); i++ {
-		r.db.QueryRow(deleteQuery, data.UserId, data.OutdatedSlugs[i].Name)
+	deleteQuery := fmt.Sprintf("delete from %s where user_id=$1 and segment_id=(select id from segments where name=$2)", usersSegmentsTable)
+	for i := 0; i < len(data.OutdatedSegments); i++ {
+		r.db.QueryRow(deleteQuery, data.UserId, data.OutdatedSegments[i].Name)
 	}
-	newSlugs := make([]models.Slug, len(data.NewSlugs))
-	query := fmt.Sprintf("insert into %s (user_id,slug_id) values ((select id from users where id=$1), (select id from slugs where name=$2)) returning $2", usersSlugsTable)
-	for i := 0; i < len(data.NewSlugs); i++ {
-		row := r.db.QueryRow(query, data.UserId, data.NewSlugs[i].Name)
-		row.Scan(&newSlugs[i].Name)
+	newSegments := make([]models.Segment, len(data.NewSegments))
+	query := fmt.Sprintf("insert into %s (user_id,segment_id) values ((select id from users where id=$1), (select id from segments where name=$2)) returning $2", usersSegmentsTable)
+	for i := 0; i < len(data.NewSegments); i++ {
+		row := r.db.QueryRow(query, data.UserId, data.NewSegments[i].Name)
+		row.Scan(&newSegments[i].Name)
 	}
-	return newSlugs, nil
+	return newSegments, nil
 }
 
-func (r *UserPostgres) GetActiveSlugsByID(userId int64) ([]models.Slug, error) {
-	var ActiveSlugs []models.Slug
-	query := fmt.Sprintf("select slug_id as id, name from %s inner join %s on slugs.id=users_slugs.slug_id where user_id=$1", slugsTable, usersSlugsTable)
+func (r *UserPostgres) GetActiveSegmentsByID(userId int64) ([]models.Segment, error) {
+	var ActiveSegments []models.Segment
+	query := fmt.Sprintf("select segment_id as id, name from %s inner join %s on segments.id=users_segments.segment_id where user_id=$1", segmentsTable, usersSegmentsTable)
 
-	if err := r.db.Select(&ActiveSlugs, query, userId); err != nil {
+	if err := r.db.Select(&ActiveSegments, query, userId); err != nil {
 		return nil, err
 	}
-	return ActiveSlugs, nil
+	return ActiveSegments, nil
 }
 
 func (r *UserPostgres) GetUserById(userId int64) (int64, error) {

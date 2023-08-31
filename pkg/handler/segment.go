@@ -7,14 +7,14 @@ import (
 	"github.com/mrnkslv/user-segmentation-service/models"
 )
 
-func (h *Handler) createSlug(c *gin.Context) {
-	var input models.Slug
+func (h *Handler) createSegment(c *gin.Context) {
+	var input models.Segment
 	if err := c.BindJSON(&input); err != nil {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	id, err := h.services.Slugger.CreateSlug(input)
+	id, err := h.services.Segments.CreateSegment(input)
 	if err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -23,14 +23,14 @@ func (h *Handler) createSlug(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{"id": id})
 }
 
-func (h *Handler) deleteSlug(c *gin.Context) {
-	var input models.Slug
+func (h *Handler) deleteSegment(c *gin.Context) {
+	var input models.Segment
 	if err := c.BindJSON(&input); err != nil {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	id, err := h.services.Slugger.DeleteSlug(input)
+	id, err := h.services.Segments.DeleteSegment(input)
 	if err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

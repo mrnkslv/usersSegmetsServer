@@ -1,6 +1,6 @@
 package models
 
-type Slug struct {
+type Segment struct {
 	Id   int64  `db:"id" json:"-"`
 	Name string `db:"name" json:"name"`
 }
