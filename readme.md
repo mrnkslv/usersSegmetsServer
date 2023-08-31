@@ -19,7 +19,10 @@ For quick start enter in the terminal command:
 ```
 docker-compose up --build
 ```
-
+In case of a database initialization error when launching the app container after the build, restart the container via docker commands or stop the process using (ctrl+c) and enter the command:
+```
+docker-compose up
+```
 To stop containers and remove containers,networks,volumes and images created by up: 
 ```
 docker-compose down
