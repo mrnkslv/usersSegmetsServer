@@ -1,8 +1,16 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/mrnkslv/user-segmentation-service/pkg/service"
+)
 
 type Handler struct {
+	services *service.Service
+}
+
+func NewHandler(services *service.Service) *Handler {
+	return &Handler{services: services}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
@@ -13,13 +21,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	slugs := api.Group("/slugs")
 	{
 		slugs.POST("/", h.createSlug)
-		slugs.DELETE("/:id", h.deleteSlug)
+		slugs.DELETE("/", h.deleteSlug)
 	}
 	users := api.Group("/users")
 	{
-		users.POST("/:id", h.addUserToSlug)        //slugid
-		users.DELETE("/:id", h.deleteUserFromSlug) //slugid
-		users.GET("/:id", h.getActiveSlugsByID)    //userid
+		users.POST("/", h.addUserToSlug)     //slugid
+		users.GET("/", h.getActiveSlugsByID) //userid
 	}
 	return router
 }
