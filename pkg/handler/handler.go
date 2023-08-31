@@ -18,15 +18,15 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	api := router.Group("/api")
 
-	slugs := api.Group("/slugs")
+	segments := api.Group("/segments")
 	{
-		slugs.POST("/", h.createSlug)
-		slugs.DELETE("/", h.deleteSlug)
+		segments.POST("/", h.createSegment)
+		segments.DELETE("/", h.deleteSegment)
 	}
 	users := api.Group("/users")
 	{
-		users.POST("/", h.addUserToSlug)     //slugid
-		users.GET("/", h.getActiveSlugsByID) //userid
+		users.POST("/", h.addUserToSegment)
+		users.GET("/", h.getActiveSegmentsByID)
 	}
 	return router
 }

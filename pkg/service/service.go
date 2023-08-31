@@ -5,25 +5,25 @@ import (
 	"github.com/mrnkslv/user-segmentation-service/pkg/repository"
 )
 
-type Slugger interface {
-	CreateSlug(models.Slug) (int64, error)
-	DeleteSlug(slug models.Slug) (int64, error)
+type Segments interface {
+	CreateSegment(models.Segment) (int64, error)
+	DeleteSegment(slug models.Segment) (int64, error)
 }
 
 type Users interface {
-	AddUserToSlug(data models.AddSlugstoUser) ([]models.Slug, error)
-	GetActiveSlugsByID(userId int64) ([]models.Slug, error)
+	AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, error)
+	GetActiveSegmentsByID(userId int64) ([]models.Segment, error)
 	Exists(userId int64) (bool, error)
 }
 
 type Service struct {
-	Slugger
+	Segments
 	Users
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		Slugger: NewSlugService(repos.Slugger),
-		Users:   NewUserService(repos.User),
+		Segments: NewSegmentService(repos.Segment),
+		Users:    NewUserService(repos.User),
 	}
 }

@@ -5,25 +5,25 @@ import (
 	"github.com/mrnkslv/user-segmentation-service/models"
 )
 
-type Slugger interface {
-	CreateSlug(slug models.Slug) (int64, error)
-	DeleteSlug(slug models.Slug) (int64, error)
+type Segment interface {
+	CreateSegment(slug models.Segment) (int64, error)
+	DeleteSegment(slug models.Segment) (int64, error)
 }
 
 type User interface {
-	AddUserToSlug(data models.AddSlugstoUser) ([]models.Slug, error)
-	GetActiveSlugsByID(userId int64) ([]models.Slug, error)
+	AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, error)
+	GetActiveSegmentsByID(userId int64) ([]models.Segment, error)
 	GetUserById(userId int64) (int64, error)
 }
 
 type Repository struct {
-	Slugger
+	Segment
 	User
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		Slugger: NewSlugPostgres(db),
+		Segment: NewSegmentPostgres(db),
 		User:    NewUserPostgres(db),
 	}
 }

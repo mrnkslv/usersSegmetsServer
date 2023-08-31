@@ -16,12 +16,12 @@ func NewUserService(repo repository.User) *User {
 	return &User{repo: repo}
 }
 
-func (s *User) AddUserToSlug(data models.AddSlugstoUser) ([]models.Slug, error) {
-	return s.repo.AddUserToSlug(data)
+func (s *User) AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, error) {
+	return s.repo.AddUserToSegments(data)
 }
 
-func (s *User) GetActiveSlugsByID(userId int64) ([]models.Slug, error) {
-	return s.repo.GetActiveSlugsByID(userId)
+func (s *User) GetActiveSegmentsByID(userId int64) ([]models.Segment, error) {
+	return s.repo.GetActiveSegmentsByID(userId)
 }
 
 func (s *User) Exists(userId int64) (bool, error) {
