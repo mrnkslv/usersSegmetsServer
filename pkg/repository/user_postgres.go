@@ -31,3 +31,13 @@ func (r *UserPostgres) AddUserToSlug(data models.AddSlugstoUser) (int64, error) 
 	}
 	return slug_id, nil
 }
+
+func (r *UserPostgres) GetActiveSlugsByID(userId int64) ([]models.Slug, error) {
+	var ActiveSlugs []models.Slug
+	query := fmt.Sprintf("select slug_id as id, name from %s inner join %s on slugs.id=users_slugs.slug_id where user_id=$1", slugsTable, usersSlugsTable)
+
+	if err := r.db.Select(&ActiveSlugs, query, userId); err != nil {
+		return nil, err
+	}
+	return ActiveSlugs, nil
+}

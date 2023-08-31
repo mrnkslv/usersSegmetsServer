@@ -16,3 +16,7 @@ func NewUserService(repo repository.User) *User {
 func (s *User) AddUserToSlug(data models.AddSlugstoUser) (int64, error) {
 	return s.repo.AddUserToSlug(data)
 }
+
+func (s *User) GetActiveSlugsByID(userId int64) ([]models.Slug, error) {
+	return s.repo.GetActiveSlugsByID(userId)
+}
