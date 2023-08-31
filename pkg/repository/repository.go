@@ -11,8 +11,9 @@ type Slugger interface {
 }
 
 type User interface {
-	AddUserToSlug(data models.AddSlugstoUser) (int64, error)
+	AddUserToSlug(data models.AddSlugstoUser) ([]models.Slug, error)
 	GetActiveSlugsByID(userId int64) ([]models.Slug, error)
+	GetUserById(userId int64) (int64, error)
 }
 
 type Repository struct {

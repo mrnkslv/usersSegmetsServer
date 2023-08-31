@@ -14,12 +14,17 @@ func (h *Handler) addUserToSlug(c *gin.Context) {
 		NewErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
+	exists, err := h.services.Users.Exists(input.UserId)
+	if exists == false {
+		NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 	newSlugs, err := h.services.Users.AddUserToSlug(input)
 	if err != nil {
 		NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, newSlugs)
+	c.JSON(http.StatusOK, map[string]interface{}{"new_slugs": newSlugs})
 }
 
 func (h *Handler) getActiveSlugsByID(c *gin.Context) {

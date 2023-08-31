@@ -19,18 +19,19 @@ type AddSlugstoUser struct {
 
 /*create table users(
     id bigserial primary key,
-    name varchar(128) not null
+    name varchar(128) not null unique
 );
 
 create table slugs (
     id bigserial primary key,
-    name varchar(128) not null
+    name varchar(128) not null unique
 );
 
 create table users_slugs (
-	id bigserial primary key,
+	id bigserial,
 	user_id bigint not null,
-	slug_id bigint not null
+	slug_id bigint not null,
+	primary key(user_id,slug_id)
 );
 
 insert into users (name)

@@ -11,8 +11,9 @@ type Slugger interface {
 }
 
 type Users interface {
-	AddUserToSlug(data models.AddSlugstoUser) (int64, error)
+	AddUserToSlug(data models.AddSlugstoUser) ([]models.Slug, error)
 	GetActiveSlugsByID(userId int64) ([]models.Slug, error)
+	Exists(userId int64) (bool, error)
 }
 
 type Service struct {
