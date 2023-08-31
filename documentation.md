@@ -50,7 +50,7 @@ to delete tables use:
 drop_table users_segments;
 drop table users;
 drop table segments;
-
+```
 ## Segments
 
 Used to create or delete segment
