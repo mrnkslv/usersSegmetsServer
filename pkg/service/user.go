@@ -16,7 +16,7 @@ func NewUserService(repo repository.User) *User {
 	return &User{repo: repo}
 }
 
-func (s *User) AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, error) {
+func (s *User) AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, []models.Segment, error) {
 	return s.repo.AddUserToSegments(data)
 }
 

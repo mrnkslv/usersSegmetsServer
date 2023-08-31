@@ -7,11 +7,11 @@ import (
 
 type Segments interface {
 	CreateSegment(models.Segment) (int64, error)
-	DeleteSegment(slug models.Segment) (int64, error)
+	DeleteSegment(models.Segment) (int64, error)
 }
 
 type Users interface {
-	AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, error)
+	AddUserToSegments(data models.AddSegmentstoUser) ([]models.Segment, []models.Segment, error)
 	GetActiveSegmentsByID(userId int64) ([]models.Segment, error)
 	Exists(userId int64) (bool, error)
 }
